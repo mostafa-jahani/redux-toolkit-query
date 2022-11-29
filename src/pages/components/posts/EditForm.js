@@ -1,28 +1,27 @@
 import {Field, Form, Formik} from "formik";
-import {useAddPostMutation} from "../../../app/postApi";
-import {sweetalertAddPost} from "../../../helpers/sweetalertService";
 import {useEffect} from "react";
-import * as yup from "yup";
 import {useNavigate} from "react-router-dom";
+import {useUpdatePostMutation} from "../../../app/postApi";
+import {sweetalertUpdatePost} from "../../../helpers/sweetalertService";
 import {postFormValidation} from "../../../helpers/postFormValidation";
-import {createFormInitialValues} from "../../../helpers/initialValues";
+import {updatePostInitialValues} from "../../../helpers/initialValues";
 
 
-const CreateFormPost = () => {
+const EditFormPost = ({post}) => {
     const navigate = useNavigate()
-    const [addPost, {isLoading, isSuccess}] = useAddPostMutation()
+    const [updatePost, {isLoading, isSuccess}] = useUpdatePostMutation()
     useEffect(() => {
         if (isSuccess) {
-            sweetalertAddPost()
-            navigate("/posts")
+            sweetalertUpdatePost()
+            navigate('/posts')
         }
     }, [isLoading]);
 
     return (
         <Formik
-            initialValues = {createFormInitialValues}
+            initialValues = {updatePostInitialValues(post)}
             onSubmit = { ({title, body}) => {
-                addPost({title, body})
+                updatePost(post.id, {title, body})
             }}
             validationSchema={postFormValidation}
         >
@@ -39,7 +38,7 @@ const CreateFormPost = () => {
                         <Field name="body" as="textarea" rows="4" className="form-control"/>
                         {errors.body && touched.body ? (<div className="text-danger">{errors.body}</div>) : null}
                     </div>
-                    <button className="btn btn-dark" type="submit">Create</button>
+                    <button className="btn btn-dark" type="submit">Edit</button>
                 </Form>
             )}
 
@@ -47,4 +46,4 @@ const CreateFormPost = () => {
     )
 }
 
-export default CreateFormPost;
+export default EditFormPost;
