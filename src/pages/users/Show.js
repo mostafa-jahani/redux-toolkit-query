@@ -7,25 +7,23 @@ const ShowUser = () => {
     const {data: user, isLoading, isError, error, isSuccess} = useUserQuery(userId)
 
     return (
-        <div className="container mt-5">
-            <div className="row g-3">
-                {isError && <div>{error}</div>}
-                {isLoading && <div className="spinner-border"></div>}
-                {isSuccess && <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">
-                            {user.name}
-                        </div>
-                        <ul className="list-group list-group-flush">
-                            <li className="list-group-item">username : {user.username}</li>
-                            <li className="list-group-item">email : {user.email}</li>
-                            <li className="list-group-item">phone : {user.phone}</li>
-                            <li className="list-group-item">website : {user.website}</li>
-                        </ul>
+        <>
+            {isError && <div>{error}</div>}
+            {isLoading && <div className="spinner-border"></div>}
+            {isSuccess && <div className="col-md-8">
+                <div className="card">
+                    <div className="card-header">
+                        {user.name}
                     </div>
-                </div>}
-            </div>
-        </div>
+                    <ul className="list-group list-group-flush">
+                        <li className="list-group-item">username : {user.username}</li>
+                        <li className="list-group-item">email : {user.email}</li>
+                        <li className="list-group-item">phone : {user.phone}</li>
+                        <li className="list-group-item">website : {user.website}</li>
+                    </ul>
+                </div>
+            </div>}
+        </>
     )
 }
 
