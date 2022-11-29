@@ -1,6 +1,7 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Header from "./pages/components/Header";
 import Home from "./pages/Home";
+import IndexUser from "./pages/Index";
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
         <Header />
         <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/users" element={<IndexUser />} />
         </Routes>
     </BrowserRouter>
   );
