@@ -1,5 +1,5 @@
-import {useUsersQuery} from "../app/userApi";
-import ListUsers from "./components/users/List";
+import {useUsersQuery} from "../../app/userApi";
+import ListUsers from "../components/users/List";
 
 
 const IndexUser = () => {
